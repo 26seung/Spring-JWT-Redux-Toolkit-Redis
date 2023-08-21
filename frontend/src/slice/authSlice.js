@@ -66,43 +66,44 @@ const initialState = { user: null, loading: null };
 const authSlice = createSlice({
   name: "auth",
   initialState,
-  extraReducers: {
-    //  회원가입 reducer
-    [join.fulfilled]: (state, action) => {
-      state.loading = false;
-    },
-    [join.rejected]: (state, action) => {
-      state.loading = false;
-    },
-    //  로그인 reducer
-    [login.pending]: (state, action) => {
-      state.loading = true;
-    },
-    [login.fulfilled]: (state, action) => {
-      state.loading = false;
-      state.user = action.payload;
-    },
-    [login.rejected]: (state, action) => {
-      state.loading = false;
-      state.user = null;
-    },
-    //  로그아웃 reducer
-    [logout.fulfilled]: (state, action) => {
-      state.loading = false;
-      state.user = null;
-    },
-    //  token 갱신 reducer
-    [reissue.pending]: (state, action) => {
-      state.loading = true;
-    },
-    [reissue.fulfilled]: (state, action) => {
-      state.loading = false;
-      state.user = action.payload;
-    },
-    [reissue.rejected]: (state, action) => {
-      state.loading = false;
-      state.user = null;
-    },
+  extraReducers: (builder) => {
+    builder
+      //  회원가입 reducer
+      .addCase(join.fulfilled, (state, action) => {
+        state.loading = false;
+      })
+      .addCase(join.rejected, (state, action) => {
+        state.loading = false;
+      })
+      //  로그인 reducer
+      .addCase(login.pending, (state, action) => {
+        state.loading = true;
+      })
+      .addCase(login.fulfilled, (state, action) => {
+        state.loading = false;
+        state.user = action.payload;
+      })
+      .addCase(login.rejected, (state, action) => {
+        state.loading = false;
+        state.user = null;
+      })
+      //  로그아웃 reducer
+      .addCase(logout.fulfilled, (state, action) => {
+        state.loading = false;
+        state.user = null;
+      })
+      //  token 갱신 reducer
+      .addCase(reissue.pending, (state, action) => {
+        state.loading = true;
+      })
+      .addCase(reissue.fulfilled, (state, action) => {
+        state.loading = false;
+        state.user = action.payload;
+      })
+      .addCase(reissue.rejected, (state, action) => {
+        state.loading = false;
+        state.user = null;
+      });
   },
 });
 
