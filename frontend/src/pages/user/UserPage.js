@@ -13,7 +13,7 @@ const UserPage = () => {
         return res;
       })
       .catch((err) => {
-        // console.log(err);
+        console.log("User Page error ", err);
         setData(err.message);
         return err;
       });

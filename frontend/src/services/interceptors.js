@@ -27,19 +27,23 @@ const interceptors = (store) => {
       return res;
     },
     async (error) => {
-      const originalConfig = error.config;
-      const CMResponseError = error.response;
-      console.log("interceptors.response.err : ", error);
+      // console.log("interceptors.response.err : ", error);
+      const {
+        config,
+        response: { status },
+      } = error;
 
-      if (originalConfig.url !== "/auth/signin" && CMResponseError) {
-        // 401 status & option status(_retry = false)
-        if (CMResponseError.status === 401 && !originalConfig._retry) {
-          originalConfig._retry = true;
-          console.log("interceptors.response.err : ", error);
+      //  url check
+      if (config.url !== "/auth/reissue" && config.url !== "/auth/login") {
+        // 401 status & option config(_reissue = false)
+        if (status === 401 && !config._reissue) {
+          //  중복 수행 방지 체크
+          config._reissue = true;
           try {
+            //  token 재발행 Dispatch
             await dispatch(reissue());
 
-            return api(originalConfig);
+            return api(config);
           } catch (err) {
             return Promise.reject(err);
           }

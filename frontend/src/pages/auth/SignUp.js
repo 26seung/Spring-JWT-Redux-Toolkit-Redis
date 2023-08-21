@@ -27,12 +27,12 @@ const SignUp = () => {
     dispatch(join({ username, password }))
       .unwrap()
       .then((res) => {
-        console.log("SignUp Page response : ", res);
+        // console.log("SignUp Page response : ", res);
         //  "로그인" 페이지로 이동
         navigate("/auth/signin");
       })
       .catch((err) => {
-        console.log("SignUp Page error : ", err);
+        // console.log("SignUp Page error : ", err);
       });
   };
 

@@ -27,7 +27,7 @@ const Header = () => {
       }
     };
     userRefresh();
-  }, []);
+  }, [currentUser, dispatch]);
 
   //  authSlice. loading state : true 인 경우 loading Spinner
   if (currentLoading) {
@@ -41,7 +41,10 @@ const Header = () => {
     <>
       <header className="text-gray-600 body-font">
         <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
-          <Link className="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
+          <Link
+            to={"/"}
+            className="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -58,16 +61,16 @@ const Header = () => {
           </Link>
           <nav className="md:ml-auto flex flex-wrap items-center text-base justify-center">
             <Link to={"/user/guest"} className="mr-5 hover:text-gray-900">
-              First Link
+              Guest Page
             </Link>
             <Link to={"/user/user"} className="mr-5 hover:text-gray-900">
-              Second Link
+              User Page
             </Link>
             <Link to={"/user/admin"} className="mr-5 hover:text-gray-900">
-              Third Link
+              Admin Page
             </Link>
             <Link to={"/"} className="mr-5 hover:text-gray-900">
-              Fourth Link
+              None
             </Link>
           </nav>
           {!currentUser ? (

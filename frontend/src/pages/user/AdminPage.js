@@ -13,7 +13,7 @@ const AdminPage = () => {
         return res;
       })
       .catch((err) => {
-        // console.log(err);
+        console.log("Admin Page error ", err);
         setData(err.message);
         return err;
       });

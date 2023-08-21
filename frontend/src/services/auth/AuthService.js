@@ -27,8 +27,6 @@ const login = (username, password) => {
     })
     .then((response) => {
       console.log("AuthService login response : ", response);
-      // const PERSISTDATA = JSON.stringify(response.data);
-      // localStorage.setItem("PERSIST-DATA", PERSISTDATA);
       return response;
     });
 };
@@ -37,7 +35,6 @@ const login = (username, password) => {
 const logout = () => {
   return api.post("/auth/logout").then((response) => {
     console.log("AuthService logout response : ", response);
-    // localStorage.removeItem("PERSIST-DATA");
     return response;
   });
 };
