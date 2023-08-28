@@ -58,6 +58,11 @@ public class TokenServiceImpl implements TokenService {
     //  3. 새로 발급된 accessToken 은 responseBody 에, refreshToken 의 경우 cookie 값에 넣어 전달한다.
     @Override
     public JwtTokenDto 토큰재발급(String refreshToken) {
+        //  넘어오는 refreshToken 정보를 검증
+        if (!jwtTokenUtils.validateToken(refreshToken)){
+            throw new RefreshTokenValidationException(refreshToken, "Not a valid refreshToken value.");
+        }
+
         //  cookie 전송된 암호화 refreshToken 의 refreshTokenId (uuid)
         String refreshTokenId = jwtTokenUtils.getRefreshTokenId(refreshToken);
 
@@ -65,12 +70,6 @@ public class TokenServiceImpl implements TokenService {
         RefreshToken findRefreshToken = refreshTokenRepository.findByRefreshTokenId(refreshTokenId)
                 .orElseThrow(()-> new RefreshTokenValidationException("redis 에 등록된 해당 유저 (" + refreshTokenId + ")를 찾을 수 없습니다."));
 
-        //  저장된 refreshToken 정보를 검증..
-        if (!jwtTokenUtils.validateToken(refreshToken)){
-            //  유효하지 않으면 refreshToken 삭제
-            refreshTokenRepository.delete(findRefreshToken);
-            throw new RefreshTokenValidationException(refreshToken, "Not a valid refreshToken value.");
-        }
 
         //  저장된 refreshToken 의 username
         String tokenUsername = findRefreshToken.getUsername();

@@ -62,7 +62,7 @@ public class AuthApiController {
 
     //  token 재발급 Controller
     @PostMapping("/reissue")
-    public ResponseEntity<?> refreshToken(@CookieValue(value = "refresh-token")String refreshToken){
+    public ResponseEntity<?> refreshToken(@CookieValue(value = "refresh-token", required = false) String refreshToken){
         log.info("[AuthApiController] - refreshToken run : {}", refreshToken);
         //  accessToken 재생성
         JwtTokenDto jwtTokenDto = tokenService.토큰재발급(refreshToken);

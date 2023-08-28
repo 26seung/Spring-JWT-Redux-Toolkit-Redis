@@ -2,6 +2,7 @@ package com.euseung.backend.utils;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.euseung.backend.security.jwt.JwtProperties;
 import lombok.RequiredArgsConstructor;
@@ -75,8 +76,8 @@ public class JwtTokenUtils {
 //            log.info("============================================");
             return true;
 
-        }catch (JWTVerificationException e){
-            log.error("JWTVerificationException : {}", e.getMessage());
+        }catch (JWTDecodeException e){
+            log.error("JWTDecodeException : {}", e.getMessage());
         }
         return false;
     }

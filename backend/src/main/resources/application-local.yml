@@ -1,0 +1,27 @@
+server:
+  port: 8080
+
+spring:
+  #  Console Message Color
+  output:
+    ansi:
+      enabled: ALWAYS
+  #  DataBase Connect
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/mysql_jwt?serverTimezone=Asia/Seoul&characterEncoding=utf8&autoReconnection=true
+    username: seung
+    password: 1234
+  #  JPA ??
+  jpa:
+    open-in-view: true
+    hibernate:
+      ddl-auto: create
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+        use_sql_comments: true
+

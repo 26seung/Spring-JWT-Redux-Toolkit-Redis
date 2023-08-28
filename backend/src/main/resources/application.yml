@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: backend
+
+  profiles:
+    active: local
+
+
+---
+# local 프로파일에 해당하는 설정들...
+
+spring:
+  config:
+    activate:
+      on-profile: local
+
+---
+# prod 프로파일에 해당하는 설정들...
+
+spring:
+  config:
+    activate:
+      on-profile: prod
