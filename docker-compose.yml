@@ -1,0 +1,57 @@
+version: "3"
+services:
+  # //  MySql Database
+  mysql-docker:
+    platform: linux/x86_64
+    image: mysql:8.0
+    container_name: mysql_jwt
+    ports:
+      - 3306:3306
+    restart: always
+    environment:
+      TZ: Asia/Seoul
+      MYSQL_DATABASE: mysql_jwt
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_USER: seung
+      MYSQL_PASSWORD: 1234
+    # volumes:
+    #   - /Users/euseung/Documents/dev/IdeaProjects/JWT-Redux-Redis/Database-docker/data/mysql:/var/lib/mysql
+
+  # // Redis DataBase
+  redis-docker:
+    image: redis:7.0.0
+    container_name: redis_jwt
+    restart: always
+    labels:
+      - "name=redis"
+      - "mode=standalone"
+    ports:
+      - 6379:6379
+    # volumes:
+    #   - /Users/euseung/Documents/dev/IdeaProjects/JWT-Redux-Redis/Database-docker/data/redis:/data
+  # redis 접근 명령어  : docker exec -it redis_jwt redis-cli
+  # redis cli 명령어  : 키조회 (key* , scan 0) / 삭제 (flushall)
+
+  # //  Spring Boot
+  backend:
+    container_name: backend
+    restart: always
+    build: ./backend/.
+    ports:
+      - 8080:8080
+    depends_on:
+      - mysql-docker
+      - redis-docker
+
+  # //  React
+  frontend:
+    container_name: frontend
+    restart: always
+    build: ./frontend/.
+    ports:
+      - 80:80
+    depends_on:
+      - backend
+#
+# docker-compose -f docker-compose.yml up -d
+# docker-compose -f docker-compose.yml down
