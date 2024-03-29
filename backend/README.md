@@ -17,7 +17,7 @@
 ##### `@PostMapping("/api/auth/login)` : 로그인
 
 - 로그인 요청 시 : `attemptAuthentication()` 메서드 실행
-  - 시큐리티 로그인은 `AuthenticationFilter`의 `AuthenticationManager`를 통 인증을 처리한다. `(UsernamePasswordAuthenticationFilter)`
+  - 시큐리티 로그인은 `AuthenticationFilter`의 `AuthenticationManager`를 통해 인증을 처리한다. `(UsernamePasswordAuthenticationFilter) 사용`
     - Servlet 요청 객체인 (HttpServletRequest) 에서 `username & password`를 기반으로 인증 객체인 `UsernamePasswordAuthenticationToken` 을 생성
     - `AuthenticationFilter`는 `AuthenticationManager`에게 인증 객체를 전달
     - `AuthenticationManager`는 전달받은 인증 객체의 정보를 `UserDetailsService`로 전달

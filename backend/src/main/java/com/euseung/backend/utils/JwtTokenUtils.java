@@ -4,6 +4,7 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
+import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.euseung.backend.security.jwt.JwtProperties;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -78,6 +79,8 @@ public class JwtTokenUtils {
 
         }catch (JWTDecodeException e){
             log.error("JWTDecodeException : {}", e.getMessage());
+        }catch (TokenExpiredException e){
+            log.error("TokenExpiredException : {}", e.getMessage());
         }
         return false;
     }

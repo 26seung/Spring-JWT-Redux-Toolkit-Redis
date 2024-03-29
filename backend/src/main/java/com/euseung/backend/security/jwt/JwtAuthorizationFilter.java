@@ -33,7 +33,7 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
-        System.out.println("::::::::::::::::::::::::::::::::::::::::::::");
+        System.out.println(":::::::::::::::::::::::::::::::::::::::::::: [doFilterInternal]");
         String jwtToken = getJwtHeader(request);
         //  accessToken 값이 넘어왔는지 체크 & 정상적인 사용자인지를 확인
         if (jwtToken != null && jwtTokenUtils.validateToken(jwtToken)){
